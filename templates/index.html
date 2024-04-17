@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: grey;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #chat-container {
+            width: 650px;
+            min-height:800px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #chat-display {
+            height: 700px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .message-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+            margin-right: auto;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .bot-message {
+            background-color: #c8e6c9;
+            padding: 10px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+            margin-left: auto;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #c8ccd1;
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        button {
+            width: 60px;
+            height: 40px;
+            border: none;
+            background-color: green;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            margin-left: 10px;
+        }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-display"></div>
+        <div class="message-container">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var display = document.getElementById('chat-display');
+            var userInput = document.getElementById('user-input');
+            var sendButton = document.getElementById('send-button');
+
+            function appendMessage(message, sender) {
+                var messageDiv = document.createElement('div');
+                messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+                messageDiv.innerText = message;
+                display.appendChild(messageDiv);
+            }
+
+            function sendMessage() {
+                var userMessage = userInput.value.trim();
+                if (userMessage !== '') {
+                    appendMessage(userMessage, 'user');
+                    userInput.value = '';
+
+                    // Send user message to the server
+                    fetch('/get_response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: 'user_message=' + encodeURIComponent(userMessage)
+                    })
+                    .then(response => response.text())
+                    .then(data => appendMessage(data, 'bot'));
+                }
+            }
+
+            sendButton.addEventListener('click', sendMessage);
+            userInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

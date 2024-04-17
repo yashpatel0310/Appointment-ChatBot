@@ -1,0 +1,71 @@
+{"intents": [
+
+
+        {"tag": "hi",
+         "patterns": ["HI", "Hello", "I need help", "hey"],
+         "responses": ["Hi there! How can I assist you today?"],
+         "context_set": ""
+        },
+        
+        {"tag": "hello",
+         "patterns": ["Hello"],
+         "responses": ["Hello! Need any help or information?"],
+         "context_set": ""
+        },
+        
+        {"tag": "hey",
+         "patterns": ["hey"],
+         "responses": ["Hey, welcome! What brings you here?"],
+         "context_set": ""
+        },
+        {"tag": "help",
+         "patterns": ["I need help"],
+         "responses": ["Greetings! What can I do for you?"],
+         "context_set": ""
+        },
+        
+        {"tag": "book",
+         "patterns": ["I want to book an appointment"],
+         "responses": ["Please specify the type of appointment you need, such as a medical check-up, consultation, or service booking."],
+         "context_set": ""
+        },
+        {"tag": "doctor",
+         "patterns": ["I want to see a doctor"],
+         "responses": [" I'll assist you in finding an available slot. when you want me to book a slot for you?"],
+         "context_set": ""
+        },
+        
+        {"tag": "Appointment",
+         "patterns": ["i want appointment"],
+         "responses": ["Let me know your preferred date and time for the appointment, and I'll check our availability."],
+         "context_set": ""
+        },
+
+        {"tag": "monday",
+         "patterns": ["on monday","how about monday?"],
+         "responses": ["Sure, I can set up a reminder for you. Just let me know how you'd like to receive it via email, SMS, or both."],
+         "context_set": ""
+        },
+        {"tag": "email",
+         "patterns": ["i want email"],
+         "responses": ["your appointment is booked with doctor, you will recieve a reminder shortly!"],
+         "context_set": ""
+        },
+        {"tag": "thank you",
+         "patterns": ["Thank you"],
+         "responses": ["Thank you for booking your appointment with us! If you have any further questions or need assistance, feel free to reach out anytime."],
+         "context_set": ""
+        },
+        {"tag": "thanks",
+         "patterns": ["thanks"],
+         "responses": ["Thank you! Your appointment is confirmed. We're grateful for the opportunity to assist you. If there's anything else we can do to make your visit more comfortable, please inform us."],
+         "context_set": ""
+        },
+        {"tag": "thanks",
+         "patterns": ["thanks"],
+         "responses": ["Thanks a lot for booking your appointment! Your confirmation details have been sent to you. If you need to reschedule or have any queries, we're here to help."],
+         "context_set": ""
+        }
+
+   ]
+}
